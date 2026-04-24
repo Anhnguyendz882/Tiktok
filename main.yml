@@ -1,0 +1,33 @@
+name: TikTok Auto Farm
+
+on:
+  workflow_dispatch: # Cho phép ông bấm nút "Run" thủ công
+  schedule:
+    - cron: '*/30 * * * *' # Cứ 30 phút tự chạy một lần
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium
+          playwright install-deps
+
+      - name: Run Bot
+        run: python bot.py
+
+      - name: Save Result
+        uses: actions/upload-artifact@v3
+        with:
+          name: tiktok-clones
+          path: clones.txt
