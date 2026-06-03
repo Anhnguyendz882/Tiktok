@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "em ten gi nha o dau",
+  "version": "34.0",
+  "description": "Absolute Loudness, Left-Center Panning & Anti-Counter Engine for Discord",
+  "permissions": [],
+  "content_scripts": [
+    {
+      "matches": ["*://discord.com/*", "https://*.discordapp.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ]
+}
